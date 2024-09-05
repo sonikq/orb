@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/paulmach/orb"
+	"github.com/sonikq/orb"
 )
 
 func TestMarshal(t *testing.T) {

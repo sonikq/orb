@@ -3,9 +3,9 @@ package simplify_test
 import (
 	"fmt"
 
-	"github.com/paulmach/orb"
-	"github.com/paulmach/orb/planar"
-	"github.com/paulmach/orb/simplify"
+	"github.com/sonikq/orb"
+	"github.com/sonikq/orb/planar"
+	"github.com/sonikq/orb/simplify"
 )
 
 func ExampleDouglasPeuckerSimplifier() {

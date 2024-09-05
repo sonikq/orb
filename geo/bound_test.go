@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/paulmach/orb"
+	"github.com/sonikq/orb"
 )
 
 func TestBoundAroundPoint(t *testing.T) {

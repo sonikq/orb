@@ -3,9 +3,9 @@ package project_test
 import (
 	"fmt"
 
-	"github.com/paulmach/orb"
-	"github.com/paulmach/orb/planar"
-	"github.com/paulmach/orb/project"
+	"github.com/sonikq/orb"
+	"github.com/sonikq/orb/planar"
+	"github.com/sonikq/orb/project"
 )
 
 func ExamplePoint_toMercator() {

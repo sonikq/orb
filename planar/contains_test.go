@@ -3,7 +3,7 @@ package planar
 import (
 	"testing"
 
-	"github.com/paulmach/orb"
+	"github.com/sonikq/orb"
 )
 
 func TestRingContains(t *testing.T) {

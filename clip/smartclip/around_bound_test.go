@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/paulmach/orb"
+	"github.com/sonikq/orb"
 )
 
 func TestNexts(t *testing.T) {

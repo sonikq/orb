@@ -4,8 +4,8 @@ import (
 	"math"
 	"testing"
 
-	"github.com/paulmach/orb"
-	"github.com/paulmach/orb/internal/mercator"
+	"github.com/sonikq/orb"
+	"github.com/sonikq/orb/internal/mercator"
 )
 
 func TestMercator(t *testing.T) {

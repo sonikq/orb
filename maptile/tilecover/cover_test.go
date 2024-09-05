@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/paulmach/orb"
-	"github.com/paulmach/orb/geo"
-	"github.com/paulmach/orb/geojson"
-	"github.com/paulmach/orb/maptile"
-	"github.com/paulmach/orb/planar"
+	"github.com/sonikq/orb"
+	"github.com/sonikq/orb/geo"
+	"github.com/sonikq/orb/geojson"
+	"github.com/sonikq/orb/maptile"
+	"github.com/sonikq/orb/planar"
 )
 
 func TestTestdata(t *testing.T) {

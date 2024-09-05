@@ -8,8 +8,8 @@ import (
 	"errors"
 	"math"
 
-	"github.com/paulmach/orb"
-	"github.com/paulmach/orb/planar"
+	"github.com/sonikq/orb"
+	"github.com/sonikq/orb/planar"
 )
 
 var (

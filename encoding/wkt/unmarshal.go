@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/paulmach/orb"
+	"github.com/sonikq/orb"
 )
 
 var (

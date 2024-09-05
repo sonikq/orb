@@ -6,9 +6,9 @@ import (
 	"math"
 	"math/bits"
 
-	"github.com/paulmach/orb"
-	"github.com/paulmach/orb/geojson"
-	"github.com/paulmach/orb/internal/mercator"
+	"github.com/sonikq/orb"
+	"github.com/sonikq/orb/geojson"
+	"github.com/sonikq/orb/internal/mercator"
 )
 
 // Tiles is a set of tiles, later we can add methods to this.
