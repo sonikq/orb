@@ -14,7 +14,7 @@ type projection struct {
 	ToWGS84 orb.Projection
 }
 
-func newProjection(tile maptile.Tile, extent uint32) *projection {
+func newProjection(tile maptile.Tile, extent uint32) projection {
 	if isPowerOfTwo(extent) {
 		// powers of two extents allows for some more simplicity
 		n := uint32(bits.TrailingZeros32(extent))
@@ -22,7 +22,7 @@ func newProjection(tile maptile.Tile, extent uint32) *projection {
 
 		minx := float64(uint64(tile.X) << n)
 		miny := float64(uint64(tile.Y) << n)
-		return &projection{
+		return projection{
 			ToTile: func(p orb.Point) orb.Point {
 				x, y := mercator.ToPlanar(p[0], p[1], z)
 				return orb.Point{
@@ -40,7 +40,7 @@ func newProjection(tile maptile.Tile, extent uint32) *projection {
 	return nonPowerOfTwoProjection(tile, extent)
 }
 
-func nonPowerOfTwoProjection(tile maptile.Tile, extent uint32) *projection {
+func nonPowerOfTwoProjection(tile maptile.Tile, extent uint32) projection {
 	// I really don't know why anyone would use a non-power of two extent,
 	// but technically it is supported.
 	e := float64(extent)
@@ -48,7 +48,7 @@ func nonPowerOfTwoProjection(tile maptile.Tile, extent uint32) *projection {
 
 	minx := float64(tile.X)
 	miny := float64(tile.Y)
-	return &projection{
+	return projection{
 		ToTile: func(p orb.Point) orb.Point {
 			x, y := mercator.ToPlanar(p[0], p[1], z)
 			return orb.Point{

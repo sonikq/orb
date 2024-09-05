@@ -13,7 +13,7 @@ func (ls Layers) Simplify(s orb.Simplifier) {
 }
 
 // Simplify will run the layer geometries through the simplifier.
-func (l *Layer) Simplify(s orb.Simplifier) {
+func (l Layer) Simplify(s orb.Simplifier) {
 	count := 0
 	for _, f := range l.Features {
 		g := s.Simplify(f.Geometry)
@@ -37,7 +37,7 @@ func (ls Layers) RemoveEmpty(lineLimit, areaLimit float64) {
 }
 
 // RemoveEmpty will remove line strings shorter/smaller than the limits.
-func (l *Layer) RemoveEmpty(lineLimit, areaLimit float64) {
+func (l Layer) RemoveEmpty(lineLimit, areaLimit float64) {
 	count := 0
 	for i := 0; i < len(l.Features); i++ {
 		f := l.Features[i]

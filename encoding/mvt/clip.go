@@ -24,7 +24,7 @@ func (ls Layers) Clip(box orb.Bound) {
 // Clip will clip all geometries in this layer to the given bounds.
 // Will remove features that clip to an empty geometry, modifies the
 // layer.Features slice in place.
-func (l *Layer) Clip(box orb.Bound) {
+func (l Layer) Clip(box orb.Bound) {
 	at := 0
 	for _, f := range l.Features {
 		g := clip.Geometry(box, f.Geometry)

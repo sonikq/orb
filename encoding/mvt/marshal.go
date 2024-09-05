@@ -43,7 +43,7 @@ func MarshalGzipped(layers Layers) ([]byte, error) {
 // Features that have a nil geometry, for some reason, will be skipped and not included.
 func Marshal(layers Layers) ([]byte, error) {
 	vt := &vectortile.Tile{
-		Layers: make([]*vectortile.Tile_Layer, 0, len(layers)),
+		Layers: make([]vectortile.Tile_Layer, 0, len(layers)),
 	}
 
 	for _, l := range layers {
@@ -51,7 +51,7 @@ func Marshal(layers Layers) ([]byte, error) {
 		e := l.Extent
 
 		kve := newKeyValueEncoder()
-		layer := &vectortile.Tile_Layer{
+		layer := vectortile.Tile_Layer{
 			Name:     &l.Name,
 			Version:  &v,
 			Extent:   &e,
@@ -59,7 +59,7 @@ func Marshal(layers Layers) ([]byte, error) {
 		}
 
 		for _, f := range l.Features {
-			if err := addFeature(layer, kve, &f); err != nil {
+			if err := addFeature(layer, kve, f); err != nil {
 				return nil, err
 			}
 		}
@@ -73,7 +73,7 @@ func Marshal(layers Layers) ([]byte, error) {
 	return proto.Marshal(vt)
 }
 
-func addFeature(layer *vectortile.Tile_Layer, kve *keyValueEncoder, f *geojson.Feature) error {
+func addFeature(layer vectortile.Tile_Layer, kve *keyValueEncoder, f geojson.Feature) error {
 	if f.Geometry == nil {
 		return nil
 	}
@@ -86,7 +86,7 @@ func addFeature(layer *vectortile.Tile_Layer, kve *keyValueEncoder, f *geojson.F
 	return addSingleGeometryFeature(layer, kve, f.Geometry, f.Properties, f.ID)
 }
 
-func addSingleGeometryFeature(layer *vectortile.Tile_Layer, kve *keyValueEncoder, g orb.Geometry, p geojson.Properties, id interface{}) error {
+func addSingleGeometryFeature(layer vectortile.Tile_Layer, kve *keyValueEncoder, g orb.Geometry, p geojson.Properties, id interface{}) error {
 	geomType, encodedGeometry, err := encodeGeometry(g)
 	if err != nil {
 		return err

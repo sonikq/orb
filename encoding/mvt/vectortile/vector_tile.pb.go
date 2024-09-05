@@ -71,7 +71,7 @@ func (Tile_GeomType) EnumDescriptor() ([]byte, []int) {
 }
 
 type Tile struct {
-	Layers                       []*Tile_Layer `protobuf:"bytes,3,rep,name=layers" json:"layers,omitempty"`
+	Layers                       []Tile_Layer `protobuf:"bytes,3,rep,name=layers" json:"layers,omitempty"`
 	XXX_NoUnkeyedLiteral         struct{}      `json:"-"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
@@ -120,7 +120,7 @@ func (m *Tile) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Tile proto.InternalMessageInfo
 
-func (m *Tile) GetLayers() []*Tile_Layer {
+func (m *Tile) GetLayers() []Tile_Layer {
 	if m != nil {
 		return m.Layers
 	}
@@ -983,7 +983,7 @@ func (m *Tile) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Layers = append(m.Layers, &Tile_Layer{})
+			m.Layers = append(m.Layers, Tile_Layer{})
 			if err := m.Layers[len(m.Layers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

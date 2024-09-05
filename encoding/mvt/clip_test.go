@@ -17,7 +17,7 @@ func TestLayersClip(t *testing.T) {
 	}{
 		{
 			name: "clips polygon and line",
-			input: Layers{&Layer{
+			input: Layers{Layer{
 				Features: []geojson.Feature{
 					*geojson.NewFeature(orb.Polygon([]orb.Ring{
 						{
@@ -30,7 +30,7 @@ func TestLayersClip(t *testing.T) {
 					*geojson.NewFeature(orb.LineString{{-15, 0}, {66, 0}}),
 				},
 			}},
-			output: Layers{&Layer{
+			output: Layers{Layer{
 				Features: []geojson.Feature{
 					*geojson.NewFeature(orb.Polygon([]orb.Ring{
 						{
