@@ -350,7 +350,7 @@ type Tile_Layer struct {
 	Version *uint32 `protobuf:"varint,15,req,name=version,def=1" json:"version,omitempty"`
 	Name    *string `protobuf:"bytes,1,req,name=name" json:"name,omitempty"`
 	// The actual features in this tile.
-	Features []*Tile_Feature `protobuf:"bytes,2,rep,name=features" json:"features,omitempty"`
+	Features []Tile_Feature `protobuf:"bytes,2,rep,name=features" json:"features,omitempty"`
 	// Dictionary encoding for keys
 	Keys []string `protobuf:"bytes,3,rep,name=keys" json:"keys,omitempty"`
 	// Dictionary encoding for values
@@ -422,7 +422,7 @@ func (m *Tile_Layer) GetName() string {
 	return ""
 }
 
-func (m *Tile_Layer) GetFeatures() []*Tile_Feature {
+func (m *Tile_Layer) GetFeatures() []Tile_Feature {
 	if m != nil {
 		return m.Features
 	}
@@ -1600,7 +1600,7 @@ func (m *Tile_Layer) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Features = append(m.Features, &Tile_Feature{})
+			m.Features = append(m.Features, Tile_Feature{})
 			if err := m.Features[len(m.Features)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

@@ -157,14 +157,14 @@ func (d *decoder) Layer(msg *protoscan.Message) (*Layer, error) {
 		return nil, msg.Err()
 	}
 
-	layer.Features = make([]*geojson.Feature, len(d.features))
+	layer.Features = make([]geojson.Feature, len(d.features))
 	for i, data := range d.features {
 		msg.Reset(data)
 		f, err := d.Feature(msg)
 		if err != nil {
 			return nil, err
 		}
-		layer.Features[i] = f
+		layer.Features[i] = *f
 	}
 
 	return layer, nil

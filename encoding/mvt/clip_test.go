@@ -18,8 +18,8 @@ func TestLayersClip(t *testing.T) {
 		{
 			name: "clips polygon and line",
 			input: Layers{&Layer{
-				Features: []*geojson.Feature{
-					geojson.NewFeature(orb.Polygon([]orb.Ring{
+				Features: []geojson.Feature{
+					*geojson.NewFeature(orb.Polygon([]orb.Ring{
 						{
 							{-10, 10}, {0, 10}, {10, 10}, {10, 5}, {10, -5},
 							{10, -10}, {20, -10}, {20, 10}, {40, 10}, {40, 20},
@@ -27,19 +27,19 @@ func TestLayersClip(t *testing.T) {
 							{-10, 20},
 						},
 					})),
-					geojson.NewFeature(orb.LineString{{-15, 0}, {66, 0}}),
+					*geojson.NewFeature(orb.LineString{{-15, 0}, {66, 0}}),
 				},
 			}},
 			output: Layers{&Layer{
-				Features: []*geojson.Feature{
-					geojson.NewFeature(orb.Polygon([]orb.Ring{
+				Features: []geojson.Feature{
+					*geojson.NewFeature(orb.Polygon([]orb.Ring{
 						{
 							{0, 10}, {0, 10}, {10, 10}, {10, 5}, {10, 0},
 							{20, 0}, {20, 10}, {30, 10}, {30, 20}, {20, 20},
 							{20, 30}, {10, 30}, {10, 20}, {5, 20}, {0, 20},
 						},
 					})),
-					geojson.NewFeature(orb.LineString{{0, 0}, {30, 0}}),
+					*geojson.NewFeature(orb.LineString{{0, 0}, {30, 0}}),
 				},
 			}},
 			bound: orb.Bound{Min: orb.Point{0, 0}, Max: orb.Point{30, 30}},
@@ -60,11 +60,11 @@ func TestLayersClip(t *testing.T) {
 
 func TestLayerClip_empty(t *testing.T) {
 	layer := &Layer{
-		Features: []*geojson.Feature{
-			geojson.NewFeature(orb.Polygon{{
+		Features: []geojson.Feature{
+			*geojson.NewFeature(orb.Polygon{{
 				{-1, 1}, {0, 1}, {1, 1}, {1, 5}, {1, -5},
 			}}),
-			geojson.NewFeature(orb.LineString{{55, 0}, {66, 0}}),
+			*geojson.NewFeature(orb.LineString{{55, 0}, {66, 0}}),
 		},
 	}
 

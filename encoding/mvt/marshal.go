@@ -55,11 +55,11 @@ func Marshal(layers Layers) ([]byte, error) {
 			Name:     &l.Name,
 			Version:  &v,
 			Extent:   &e,
-			Features: make([]*vectortile.Tile_Feature, 0, len(l.Features)),
+			Features: make([]vectortile.Tile_Feature, 0, len(l.Features)),
 		}
 
 		for _, f := range l.Features {
-			if err := addFeature(layer, kve, f); err != nil {
+			if err := addFeature(layer, kve, &f); err != nil {
 				return nil, err
 			}
 		}
@@ -100,7 +100,7 @@ func addSingleGeometryFeature(layer *vectortile.Tile_Layer, kve *keyValueEncoder
 		return fmt.Errorf("error encoding geometry: %v : %s", g, err.Error())
 	}
 
-	layer.Features = append(layer.Features, &vectortile.Tile_Feature{
+	layer.Features = append(layer.Features, vectortile.Tile_Feature{
 		Id:       convertID(id),
 		Tags:     tags,
 		Type:     &geomType,
