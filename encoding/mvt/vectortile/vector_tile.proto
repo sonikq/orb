@@ -1,4 +1,4 @@
-syntax = "proto2";
+// Protocol Version 1
 
 package vector_tile;
 
