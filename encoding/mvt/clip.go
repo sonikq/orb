@@ -27,7 +27,7 @@ func (ls Layers) Clip(box orb.Bound) {
 func (l Layer) Clip(box orb.Bound) {
 	at := 0
 	for _, f := range l.Features {
-		g := clip.Geometry(box, f.Geometry)
+		g := clip.Geometry(box, orb.Clone(f.Geometry))
 		if g != nil {
 			f.Geometry = g
 			l.Features[at] = f

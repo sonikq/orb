@@ -1,6 +1,7 @@
 package mvt
 
 import (
+	"github.com/sonikq/orb"
 	"github.com/sonikq/orb/geojson"
 	"github.com/sonikq/orb/maptile"
 	"github.com/sonikq/orb/project"
@@ -24,7 +25,7 @@ type Layer struct {
 func (l Layer) ProjectToTile(tile maptile.Tile) {
 	p := newProjection(tile, l.Extent)
 	for _, f := range l.Features {
-		f.Geometry = project.Geometry(f.Geometry, p.ToTile)
+		f.Geometry = project.Geometry(orb.Clone(f.Geometry), p.ToTile)
 	}
 }
 
