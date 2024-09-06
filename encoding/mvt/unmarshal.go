@@ -96,11 +96,11 @@ func unmarshalTile(data []byte) (Layers, error) {
 	return layers, nil
 }
 
-func (d *decoder) Layer(msg *protoscan.Message) (Layer, error) {
+func (d *decoder) Layer(msg *protoscan.Message) (*Layer, error) {
 	var err error
 
 	d.Reset()
-	layer := Layer{
+	layer := &Layer{
 		Version: vectortile.Default_Tile_Layer_Version,
 		Extent:  vectortile.Default_Tile_Layer_Extent,
 	}
@@ -110,42 +110,42 @@ func (d *decoder) Layer(msg *protoscan.Message) (Layer, error) {
 		case 15: // version
 			v, err := msg.Uint32()
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 			layer.Version = v
 		case 1: // name
 			s, err := msg.String()
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 			layer.Name = s
 		case 2: // feature
 			data, err := msg.MessageData()
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 			d.features = append(d.features, data)
 		case 3: // keys
 			s, err := msg.String()
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 			d.keys = append(d.keys, s)
 		case 4: // values
 			d.valMsg, err = msg.Message(d.valMsg)
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 
 			v, err := decodeValueMsg(d.valMsg)
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 			d.values = append(d.values, v)
 		case 5: // extent
 			e, err := msg.Uint32()
 			if err != nil {
-				return Layer{}, err
+				return nil, err
 			}
 			layer.Extent = e
 		default:
@@ -154,7 +154,7 @@ func (d *decoder) Layer(msg *protoscan.Message) (Layer, error) {
 	}
 
 	if msg.Err() != nil {
-		return Layer{}, msg.Err()
+		return nil, msg.Err()
 	}
 
 	layer.Features = make([]geojson.Feature, len(d.features))
@@ -162,7 +162,7 @@ func (d *decoder) Layer(msg *protoscan.Message) (Layer, error) {
 		msg.Reset(data)
 		f, err := d.Feature(msg)
 		if err != nil {
-			return Layer{}, err
+			return nil, err
 		}
 		layer.Features[i] = *f
 	}

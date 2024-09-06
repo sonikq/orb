@@ -39,7 +39,7 @@ func (l Layer) ProjectToWGS84(tile maptile.Tile) {
 }
 
 // Layers is a set of layers.
-type Layers []Layer
+type Layers []*Layer
 
 // ProjectToTile will project all the geometries in all layers
 // to tile coordinates based on the extent and the mercator projection.
